@@ -34,11 +34,7 @@ app.use(fileupload({ useTempFiles : true,tempFileDir : '/tmp/'}));
 const port = process.env.PORT || 8000;
 
 
-mongoose.connect(process.env.DATABASE,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    useCreateIndex:true,
-    }).then(()=>console.log("database connected successfully"))
+mongoose.connect(process.env.DATABASE).then(()=>console.log("database connected successfully"))
     .catch(err=>console.log("error occurred",err));
 
     //cloud connection
