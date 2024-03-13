@@ -12,6 +12,9 @@ const jobRoutes = require('./Routes/jobRoutes');
 const cookieParser = require('cookie-parser');
 const errorHandler=require('./middleware/Error')
 
+
+
+
 //error middleware
 
 //middleware
@@ -29,6 +32,43 @@ app.use(express.json());
 
 const fileupload = require('express-fileupload');
 app.use(fileupload({ useTempFiles : true,tempFileDir : '/tmp/'}));
+
+app.post("/completion", async (req, res) => {
+    const API_KEY = process.env.OPENAI_API_KEY;
+  
+     const options ={
+      method:"POST",
+      headers:{
+          "Authorization":`Bearer ${API_KEY}`,
+          "Content-type":"application/json"
+      },
+      body:JSON.stringify({
+          model:"gpt-3.5-turbo",
+          messages:[{role:"user",content:req.body.message}],
+          max_tokens:100,
+      })
+  
+  }
+//   try{
+//      const response = await fetch('https://api.openai.com/v1/chat/completions',options)
+//      const data = await response.json()
+//      res.send(data)
+  
+//   }
+//   catch(error){
+//       console.error(error)
+//     }
+    
+try {
+    const fetch = await import('node-fetch');
+    const response = await fetch.default('https://api.openai.com/v1/chat/completions', options);
+    const data = await response.json();
+    res.send(data);
+} catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "An error occurred while processing your request." });
+}
+});
 
 //port 
 const port = process.env.PORT || 8000;
