@@ -84,7 +84,7 @@ exports.editUser = async (req, res, next) => {
     console.log("The file is ", file);
 
     //validation
-    const supportedTypes = ["jpg","png","jpeg"];
+    const supportedTypes = ["jpg","png","jpeg","pdf"];
     
     const fileType= file?.name.split('.')[1].toLowerCase();
 

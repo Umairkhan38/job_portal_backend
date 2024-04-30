@@ -23,6 +23,8 @@ exports.isAuthenticated = async (req, res, next) => {
     }
 }
 
+
+
 //middleware for admin
 exports.isAdmin = (req, res, next) => {
     if (req.user.role === 0) {
@@ -30,3 +32,4 @@ exports.isAdmin = (req, res, next) => {
     }
     next();
 }
+

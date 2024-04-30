@@ -13,8 +13,6 @@ const cookieParser = require('cookie-parser');
 const errorHandler=require('./middleware/Error')
 
 
-
-
 //error middleware
 
 //middleware
