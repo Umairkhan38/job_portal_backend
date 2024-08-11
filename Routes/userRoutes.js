@@ -11,6 +11,7 @@ router.get('/allusers', isAuthenticated, isAdmin, allUsers);
 // /api/user/id
 router.get('/user/:id', isAuthenticated, singleUser);
 
+
 router.put('/user/edit/:id', isAuthenticated, editUser);
 
 

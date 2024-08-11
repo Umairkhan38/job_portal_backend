@@ -28,18 +28,17 @@ exports.signIn = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         //validation
-        if (!email) {
-            return next(new ErrorResponse("please add an email", 403));
-        }
-        if (!password) {
-            return next(new ErrorResponse("please add a password", 403));
+        if (!email || !password) {
+            return next(new ErrorResponse("Email and password are required", 400));
         }
 
         //check user email
         const user = await User.findOne({ email });
+
         if (!user) {
             return next(new ErrorResponse("invalid credentials", 400));
         }
+
         //check password
         const isMatched = await user.comparePassword(password);
         if (!isMatched) {
@@ -53,10 +52,10 @@ exports.signIn = async (req, res, next) => {
     }
 }
 
+
 const sendTokenResponse = async (user, codeStatus, res) => {
     const token = await user.getJwtToken();
-    res
-        .status(codeStatus)
+    res.status(codeStatus)
         .cookie('token', token, { maxAge: 60 * 60 * 1000, httpOnly: true })
         .json({
             success: true,
@@ -64,6 +63,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
             id:user._id
         })
 }
+
 
 
 // log out
