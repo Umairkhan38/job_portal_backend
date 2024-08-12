@@ -23,6 +23,7 @@ router.post('/user/jobhistory',isAuthenticated,createUserJobHistory)
 //api/user/userStatus
 router.patch('/user/userStatus',updateStatus);
 
+
 //apui/user/edit/:id
 router.patch('/user/edit/:id',isAuthenticated, editUser);
 

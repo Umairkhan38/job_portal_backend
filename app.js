@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
+
 app.use(express.json());
 
 const fileupload = require('express-fileupload');

@@ -11,7 +11,7 @@ router.post('/signup',signUp);
 
 router.get('/logout',logout)
 
-router.get('/me',userProfile);
+router.get('/me',isAuthenticated,userProfile);
 
 
 module.exports = router;
